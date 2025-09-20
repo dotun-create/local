@@ -1,0 +1,348 @@
+.session-booking-form {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.session-booking-form h2 {
+  color: #1f2937;
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 2rem;
+  text-align: center;
+  border-bottom: 3px solid #3b82f6;
+  padding-bottom: 1rem;
+}
+
+.error-message {
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  color: #991b1b;
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.error-message strong {
+  font-weight: 600;
+}
+
+.form-section {
+  margin-bottom: 2.5rem;
+  padding: 1.5rem;
+  background: #f9fafb;
+  border-radius: 8px;
+  border: 1px solid #e5e7eb;
+}
+
+.form-section h3 {
+  color: #374151;
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 0 0 1.5rem 0;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid #e5e7eb;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: #374151;
+  font-size: 0.875rem;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 1rem;
+  transition: all 0.2s ease;
+  background: white;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.form-group input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+.form-group input[type="number"]::-webkit-outer-spin-button,
+.form-group input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+.recurring-settings {
+  border-left: 4px solid #10b981;
+  background: #f0fdf4;
+}
+
+.recurring-settings h3 {
+  color: #065f46;
+  border-bottom-color: #10b981;
+}
+
+.checkbox-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 500;
+  color: #374151;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 6px;
+  transition: background-color 0.2s ease;
+}
+
+.checkbox-label:hover {
+  background: rgba(59, 130, 246, 0.05);
+}
+
+.checkbox-label input[type="checkbox"] {
+  width: auto;
+  margin: 0;
+  accent-color: #3b82f6;
+  transform: scale(1.1);
+}
+
+.checkbox-label input[type="checkbox"]:focus {
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+}
+
+.form-actions {
+  text-align: center;
+  margin-top: 2.5rem;
+  padding-top: 2rem;
+  border-top: 2px solid #e5e7eb;
+}
+
+.save-button {
+  background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+  color: white;
+  border: none;
+  padding: 1rem 3rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  min-width: 200px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.save-button:hover:not(:disabled) {
+  background: linear-gradient(135deg, #2563eb, #1e40af);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.save-button:disabled {
+  background: #9ca3af;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.save-button:disabled:hover {
+  background: #9ca3af;
+}
+
+/* Payment Settings Styling */
+.form-section:has(#requirePayment) {
+  border-left: 4px solid #f59e0b;
+  background: #fffbeb;
+}
+
+.form-section:has(#requirePayment) h3 {
+  color: #92400e;
+  border-bottom-color: #f59e0b;
+}
+
+/* Zoom Settings Styling */
+.form-section:last-of-type {
+  border-left: 4px solid #8b5cf6;
+  background: #faf5ff;
+}
+
+.form-section:last-of-type h3 {
+  color: #6b21a8;
+  border-bottom-color: #8b5cf6;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .session-booking-form {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .session-booking-form h2 {
+    font-size: 1.5rem;
+  }
+
+  .form-section {
+    padding: 1rem;
+  }
+
+  .checkbox-group {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .save-button {
+    width: 100%;
+    padding: 1rem;
+  }
+
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    font-size: 16px; /* Prevents zoom on iOS */
+  }
+}
+
+@media (max-width: 480px) {
+  .session-booking-form {
+    margin: 0.5rem;
+    padding: 1rem;
+  }
+
+  .form-section h3 {
+    font-size: 1.1rem;
+  }
+
+  .checkbox-label {
+    padding: 0.75rem;
+    background: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 6px;
+  }
+}
+
+/* Loading State */
+.save-button:disabled {
+  position: relative;
+}
+
+.save-button:disabled::after {
+  content: '';
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  margin: auto;
+  border: 2px solid transparent;
+  border-top-color: #ffffff;
+  border-radius: 50%;
+  animation: button-loading-spinner 1s ease infinite;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@keyframes button-loading-spinner {
+  from {
+    transform: translate(-50%, -50%) rotate(0turn);
+  }
+  to {
+    transform: translate(-50%, -50%) rotate(1turn);
+  }
+}
+
+/* Form Validation Styles */
+.form-group input:invalid {
+  border-color: #ef4444;
+}
+
+.form-group input:invalid:focus {
+  border-color: #ef4444;
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
+}
+
+.form-group input:valid {
+  border-color: #10b981;
+}
+
+/* Required Field Indicator */
+.form-group label:has-text("*")::after {
+  content: " *";
+  color: #ef4444;
+  font-weight: 600;
+}
+
+/* Improved Focus States */
+.form-group input:focus-visible,
+.form-group select:focus-visible,
+.form-group textarea:focus-visible {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+}
+
+/* Enhanced Checkbox Styling */
+.checkbox-label input[type="checkbox"] {
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border: 2px solid #d1d5db;
+  border-radius: 3px;
+  background: white;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.2s ease;
+}
+
+.checkbox-label input[type="checkbox"]:checked {
+  background: #3b82f6;
+  border-color: #3b82f6;
+}
+
+.checkbox-label input[type="checkbox"]:checked::after {
+  content: '';
+  position: absolute;
+  top: 1px;
+  left: 5px;
+  width: 6px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+.checkbox-label input[type="checkbox"]:hover {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.1);
+}

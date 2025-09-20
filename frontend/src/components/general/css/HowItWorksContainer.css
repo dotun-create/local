@@ -1,0 +1,105 @@
+/* HowItWorksContainer Component Styles */
+.how-it-works-container-wrapper {
+  display: grid;
+  grid-template-rows: auto auto auto;
+  gap: 40px;
+  width: 100%;
+  max-width: none;
+  padding: 40px 20px;
+  background: transparent;
+  border: none;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+}
+
+.container-title-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.container-title {
+  color: #333;
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin: 0;
+  text-align: center;
+}
+
+.container-cards-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+  width: 100%;
+  justify-items: center;
+}
+
+.card-column {
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  justify-content: center;
+}
+
+.container-action-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.container-action-button {
+  background-color: #170df2;
+  border: 2px solid #170df2;
+  color: #ffffff;
+  padding: 15px 30px;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  min-width: 160px;
+}
+
+.container-action-button:hover {
+  background-color: #ffffff;
+  color: #170df2;
+  border: 2px solid #170df2;
+}
+
+.container-action-button:active {
+  transform: translateY(1px);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .how-it-works-container-wrapper {
+    gap: 30px;
+    padding: 30px 15px;
+  }
+  
+  .container-title {
+    font-size: 2rem;
+  }
+  
+  .container-cards-row {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  
+  .container-action-button {
+    padding: 12px 24px;
+    font-size: 14px;
+    min-width: 140px;
+  }
+}
+
+@media (max-width: 480px) {
+  .container-title {
+    font-size: 1.8rem;
+  }
+  
+  .how-it-works-container-wrapper {
+    padding: 20px 10px;
+  }
+}

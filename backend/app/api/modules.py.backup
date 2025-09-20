@@ -1,0 +1,312 @@
+from flask import request, jsonify
+from flask_jwt_extended import jwt_required, get_jwt_identity
+from app.api import api_bp
+from app.models import User, Course, Module
+from app import db
+import uuid
+
+@api_bp.route('/courses/<string:course_id>/modules', methods=['GET'])
+def get_modules(course_id):
+    """Get all modules for a course"""
+    try:
+        course = Course.query.get(course_id)
+        if not course:
+            return jsonify({'error': 'Course not found'}), 404
+        
+        modules = Module.query.filter_by(course_id=course_id).order_by(Module.order).all()
+        
+        return jsonify({
+            'modules': [module.to_dict() for module in modules]
+        }), 200
+        
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+@api_bp.route('/modules/<string:module_id>', methods=['GET'])
+def get_module(module_id):
+    """Get specific module"""
+    try:
+        module = Module.query.get(module_id)
+        if not module:
+            return jsonify({'error': 'Module not found'}), 404
+        
+        module_data = module.to_dict()
+        # Include lessons in response
+        module_data['lessons'] = [lesson.to_dict() for lesson in module.lessons]
+        
+        return jsonify({'module': module_data}), 200
+        
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+@api_bp.route('/courses/<string:course_id>/modules', methods=['POST'])
+@jwt_required()
+def create_module(course_id):
+    """Create new module (admin only)"""
+    try:
+        current_user_id = get_jwt_identity()
+        current_user = User.query.get(current_user_id)
+        
+        if not current_user or current_user.account_type != 'admin':
+            return jsonify({'error': 'Admin access required'}), 403
+        
+        course = Course.query.get(course_id)
+        if not course:
+            return jsonify({'error': 'Course not found'}), 404
+        
+        data = request.get_json()
+        required_fields = ['title']
+        
+        for field in required_fields:
+            if not data.get(field):
+                return jsonify({'error': f'{field} is required'}), 400
+        
+        # Get the next order number
+        max_order = db.session.query(db.func.max(Module.order)).filter_by(course_id=course_id).scalar() or 0
+        
+        # Parse dates if provided
+        from datetime import datetime, time
+        start_date = None
+        end_date = None
+
+        if data.get('startDate'):
+            try:
+                start_date = datetime.fromisoformat(data['startDate'].replace('Z', '+00:00'))
+            except:
+                pass
+
+        if data.get('endDate'):
+            try:
+                end_date = datetime.fromisoformat(data['endDate'].replace('Z', '+00:00'))
+            except:
+                pass
+
+        # Parse time fields or use defaults
+        start_time = None
+        end_time = None
+
+        if data.get('startTime'):
+            try:
+                start_time = datetime.strptime(data['startTime'], '%H:%M:%S').time()
+            except:
+                start_time = time(0, 0, 0)  # Default to 00:00:00
+        else:
+            start_time = time(0, 0, 0)  # Default to 00:00:00
+
+        if data.get('endTime'):
+            try:
+                end_time = datetime.strptime(data['endTime'], '%H:%M:%S').time()
+            except:
+                end_time = time(23, 59, 59)  # Default to 23:59:59
+        else:
+            end_time = time(23, 59, 59)  # Default to 23:59:59
+
+        # Get timezone from course if not provided
+        timezone = data.get('timezone')
+        if not timezone:
+            timezone = course.timezone or 'UTC'
+
+        module = Module(
+            id=f"module_{uuid.uuid4().hex[:8]}",
+            course_id=course_id,
+            title=data['title'],
+            description=data.get('description'),
+            duration=data.get('duration'),
+            order=data.get('order', max_order + 1),
+            start_date=start_date,
+            end_date=end_date,
+            timezone=timezone,
+            start_time=start_time,
+            end_time=end_time
+        )
+        
+        db.session.add(module)
+        db.session.commit()
+        
+        return jsonify({
+            'module': module.to_dict(),
+            'message': 'Module created successfully'
+        }), 201
+        
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({'error': str(e)}), 500
+
+@api_bp.route('/modules/<string:module_id>', methods=['PUT'])
+@jwt_required()
+def update_module(module_id):
+    """Update module (admin only)"""
+    try:
+        current_user_id = get_jwt_identity()
+        current_user = User.query.get(current_user_id)
+        
+        if not current_user or current_user.account_type != 'admin':
+            return jsonify({'error': 'Admin access required'}), 403
+        
+        module = Module.query.get(module_id)
+        if not module:
+            return jsonify({'error': 'Module not found'}), 404
+        
+        data = request.get_json()
+        
+        # Update allowed fields
+        updatable_fields = ['title', 'description', 'duration', 'order', 'status']
+        
+        for field in updatable_fields:
+            if field in data:
+                setattr(module, field, data[field])
+        
+        # Handle date fields
+        from datetime import datetime
+        
+        if 'startDate' in data:
+            if data['startDate']:
+                try:
+                    module.start_date = datetime.fromisoformat(data['startDate'].replace('Z', '+00:00'))
+                except:
+                    module.start_date = None
+            else:
+                module.start_date = None
+        
+        if 'endDate' in data:
+            if data['endDate']:
+                try:
+                    module.end_date = datetime.fromisoformat(data['endDate'].replace('Z', '+00:00'))
+                except:
+                    module.end_date = None
+            else:
+                module.end_date = None
+        
+        db.session.commit()
+        
+        return jsonify({
+            'module': module.to_dict(),
+            'message': 'Module updated successfully'
+        }), 200
+        
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({'error': str(e)}), 500
+
+@api_bp.route('/modules/<string:module_id>', methods=['DELETE'])
+@jwt_required()
+def delete_module(module_id):
+    """Delete module (admin only)"""
+    try:
+        current_user_id = get_jwt_identity()
+        current_user = User.query.get(current_user_id)
+        
+        if not current_user or current_user.account_type != 'admin':
+            return jsonify({'error': 'Admin access required'}), 403
+        
+        module = Module.query.get(module_id)
+        if not module:
+            return jsonify({'error': 'Module not found'}), 404
+        
+        db.session.delete(module)
+        db.session.commit()
+        
+        return jsonify({'message': 'Module deleted successfully'}), 200
+        
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({'error': str(e)}), 500
+
+@api_bp.route('/modules', methods=['POST'])
+@jwt_required()
+def create_module_generic():
+    """Create new module with courseId in request body (admin only)"""
+    try:
+        current_user_id = get_jwt_identity()
+        current_user = User.query.get(current_user_id)
+        
+        if not current_user or current_user.account_type != 'admin':
+            return jsonify({'error': 'Admin access required'}), 403
+        
+        data = request.get_json()
+        required_fields = ['courseId', 'title']
+        
+        for field in required_fields:
+            if not data.get(field):
+                return jsonify({'error': f'{field} is required'}), 400
+        
+        course_id = data['courseId']
+        course = Course.query.get(course_id)
+        if not course:
+            return jsonify({'error': 'Course not found'}), 404
+        
+        # Get the next order number
+        max_order = db.session.query(db.func.max(Module.order)).filter_by(course_id=course_id).scalar() or 0
+        
+        # Parse dates if provided
+        from datetime import datetime, time
+        start_date = None
+        end_date = None
+
+        if data.get('startDate'):
+            try:
+                start_date = datetime.fromisoformat(data['startDate'].replace('Z', '+00:00'))
+            except:
+                pass
+
+        if data.get('endDate'):
+            try:
+                end_date = datetime.fromisoformat(data['endDate'].replace('Z', '+00:00'))
+            except:
+                pass
+
+        # Parse time fields or use defaults
+        start_time = None
+        end_time = None
+
+        if data.get('startTime'):
+            try:
+                start_time = datetime.strptime(data['startTime'], '%H:%M:%S').time()
+            except:
+                start_time = time(0, 0, 0)  # Default to 00:00:00
+        else:
+            start_time = time(0, 0, 0)  # Default to 00:00:00
+
+        if data.get('endTime'):
+            try:
+                end_time = datetime.strptime(data['endTime'], '%H:%M:%S').time()
+            except:
+                end_time = time(23, 59, 59)  # Default to 23:59:59
+        else:
+            end_time = time(23, 59, 59)  # Default to 23:59:59
+
+        # Get timezone from course if not provided
+        timezone = data.get('timezone')
+        if not timezone:
+            timezone = course.timezone or 'UTC'
+
+        module = Module(
+            id=f"module_{uuid.uuid4().hex[:8]}",
+            course_id=course_id,
+            title=data['title'],
+            description=data.get('description'),
+            duration=data.get('duration', '1 week'),
+            order=data.get('order', max_order + 1),
+            start_date=start_date,
+            end_date=end_date,
+            timezone=timezone,
+            start_time=start_time,
+            end_time=end_time
+        )
+        
+        db.session.add(module)
+        db.session.commit()
+        
+        return jsonify({
+            'module': module.to_dict(),
+            'message': 'Module created successfully'
+        }), 201
+        
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({'error': str(e)}), 500
+
+@api_bp.route('/modules', methods=['OPTIONS'])
+def handle_modules_options():
+    """Handle CORS preflight request for modules endpoint"""
+    return '', 200

@@ -1,0 +1,101 @@
+/* App Styles */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f8f9fa;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+  cursor: default;
+}
+
+.app {
+  min-height: 100vh;
+  padding: 40px 20px;
+}
+
+.app-header {
+  text-align: center;
+  margin-bottom: 40px;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.app-header h1 {
+  color: #333;
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+  font-weight: 700;
+}
+
+.app-header p {
+  color: #666;
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+.cards-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.section-divider {
+  text-align: center;
+  margin: 60px auto 40px auto;
+  max-width: 800px;
+}
+
+.section-divider h2 {
+  color: #333;
+  font-size: 2rem;
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+
+.how-it-works-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.container-wrapper {
+  width: 100%;
+  margin: 40px 0;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .app-header h1 {
+    font-size: 2rem;
+  }
+  
+  .cards-container {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    padding: 0 10px;
+  }
+  
+  .how-it-works-container {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    padding: 0 10px;
+  }
+  
+  .section-divider h2 {
+    font-size: 1.5rem;
+  }
+  
+  .app {
+    padding: 20px 10px;
+  }
+}

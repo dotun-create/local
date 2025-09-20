@@ -1,0 +1,509 @@
+/* ===== Sessions Manager Tab CSS ===== */
+
+/* Calendar View Styles - Copied from .timeslot-mgmt-calendar-view */
+.session-calendar {
+  background: white;
+  border-radius: 8px;
+  padding: 0; /* Remove padding to let TutorCalendar handle its own spacing */
+  border: 1px solid #e5e7eb;
+  overflow: hidden; /* Ensure calendar fits properly */
+}
+
+.session-calendar .tutor-calendar {
+  border: none; /* Remove border conflicts */
+  border-radius: 0; /* Let parent handle border radius */
+  box-shadow: none; /* Remove shadow conflicts */
+}
+
+/* ===== List View Styles - Copied from .timeslot-mgmt-list-view ===== */
+
+.session-list {
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid #e1e5e9;
+}
+
+.session-list-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 20px 24px;
+  background: #f8f9fa;
+  border-bottom: 1px solid #e1e5e9;
+}
+
+.session-list-title h4 {
+  margin: 0 0 4px 0;
+  color: #2c3e50;
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.session-list-title p {
+  margin: 0;
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.session-list-actions {
+  display: flex;
+  gap: 12px;
+}
+
+.session-btn-select {
+  background: #3b82f6;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.2s;
+}
+
+.session-btn-select:hover {
+  background: #2563eb;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(59, 130, 246, 0.3);
+}
+
+.session-selection-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 24px;
+  background: #f1f5f9;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.session-selection-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.session-selection-count {
+  background: #3b82f6;
+  color: white;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.session-selection-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.session-btn-select-all,
+.session-btn-clear {
+  background: #6b7280;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.session-btn-select-all:hover,
+.session-btn-clear:hover {
+  background: #4b5563;
+}
+
+.session-btn-delete {
+  background: #dc2626;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  transition: background 0.2s;
+}
+
+.session-btn-delete:hover {
+  background: #b91c1c;
+}
+
+.session-btn-delete:disabled {
+  background: #9ca3af;
+  cursor: not-allowed;
+}
+
+.session-btn-cancel {
+  background: #e5e7eb;
+  color: #374151;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.session-btn-cancel:hover {
+  background: #d1d5db;
+}
+
+.session-list-container {
+  overflow-x: auto;
+}
+
+.session-empty-state {
+  text-align: center;
+  padding: 60px 20px;
+  color: #6b7280;
+}
+
+.session-empty-icon {
+  font-size: 3rem;
+  margin-bottom: 16px;
+  opacity: 0.5;
+}
+
+.session-empty-state h3 {
+  margin: 0 0 8px 0;
+  color: #374151;
+  font-size: 1.1rem;
+}
+
+.session-empty-state p {
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+.session-list-wrapper {
+  min-height: 300px;
+}
+
+.session-list-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.session-list-header-row {
+  background: #f8f9fa;
+  border-bottom: 2px solid #e1e5e9;
+}
+
+.session-list-table th {
+  text-align: left;
+  padding: 12px 16px;
+  font-weight: 600;
+  color: #374151;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.session-checkbox-col {
+  width: 50px;
+  text-align: center;
+}
+
+.session-day-header {
+  width: 120px;
+}
+
+.session-date-header {
+  width: 140px;
+}
+
+.session-time-header {
+  width: 180px;
+}
+
+.session-duration-header {
+  width: 100px;
+}
+
+.session-course-header {
+  width: 150px;
+}
+
+.session-timezone-header {
+  width: 120px;
+}
+
+.session-status-header {
+  width: 100px;
+}
+
+.session-actions-header {
+  width: 120px;
+  text-align: center;
+}
+
+.session-list-row {
+  border-bottom: 1px solid #f3f4f6;
+  transition: all 0.2s;
+}
+
+.session-list-row:hover {
+  background: #f9fafb;
+}
+
+.session-row-selected {
+  background: #eff6ff !important;
+  border-color: #3b82f6;
+}
+
+.session-row-selectable {
+  cursor: pointer;
+}
+
+.session-row-selectable:hover {
+  background: #f1f5f9;
+}
+
+.session-list-table td {
+  padding: 12px 16px;
+  vertical-align: middle;
+  font-size: 0.9rem;
+}
+
+.session-checkbox {
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+  accent-color: #3b82f6;
+}
+
+.session-date-cell {
+  color: #374151;
+}
+
+.session-date-content {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.session-date-display {
+  font-weight: 500;
+}
+
+.session-day-cell {
+  color: #6b7280;
+}
+
+.session-day-content {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.session-day-name {
+  font-weight: 500;
+  color: #374151;
+}
+
+.session-time-cell {
+  color: #374151;
+}
+
+.session-time-content {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.session-time-range {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-weight: 500;
+}
+
+.session-start-time,
+.session-end-time {
+  font-family: 'SF Mono', Monaco, monospace;
+  font-size: 0.85rem;
+}
+
+.session-time-separator {
+  color: #6b7280;
+  margin: 0 2px;
+}
+
+.session-timezone {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.session-timezone-abbr {
+  color: #6b7280;
+  font-size: 0.8rem;
+  font-weight: normal;
+}
+
+.session-duration-cell {
+  color: #6b7280;
+  font-family: 'SF Mono', Monaco, monospace;
+  font-size: 0.85rem;
+}
+
+.session-course-cell {
+  color: #374151;
+}
+
+.session-course-content {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.session-course-name {
+  font-weight: 500;
+  color: #374151;
+}
+
+.session-course-code {
+  color: #6b7280;
+  font-size: 0.8rem;
+}
+
+.session-timezone-cell {
+  color: #6b7280;
+  font-size: 0.85rem;
+}
+
+.session-status-cell {
+  text-align: center;
+}
+
+.session-status-badge {
+  display: inline-block;
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.session-status-available {
+  background: #dcfce7;
+  color: #16a34a;
+}
+
+.session-status-booked {
+  background: #fef3c7;
+  color: #d97706;
+}
+
+.session-status-completed {
+  background: #e0e7ff;
+  color: #4f46e5;
+}
+
+.session-actions-cell {
+  text-align: center;
+}
+
+.session-action-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+}
+
+.session-btn-edit,
+.session-btn-delete-single {
+  background: none;
+  border: none;
+  padding: 4px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: all 0.2s;
+  opacity: 0.6;
+}
+
+.session-btn-edit:hover {
+  background: #eff6ff;
+  opacity: 1;
+}
+
+.session-btn-delete-single:hover {
+  background: #fef2f2;
+  opacity: 1;
+}
+
+.session-list-footer {
+  padding: 16px 24px;
+  background: #f9fafb;
+  border-top: 1px solid #e5e7eb;
+}
+
+.session-list-summary {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-size: 0.9rem;
+  color: #6b7280;
+}
+
+.session-summary-item {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.session-summary-separator {
+  color: #d1d5db;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .session-calendar {
+    padding: 0;
+    border-radius: 4px;
+  }
+
+  .session-selection-controls {
+    flex-direction: column;
+    gap: 12px;
+    align-items: stretch;
+  }
+
+  .session-selection-actions {
+    justify-content: center;
+  }
+
+  .session-list-table {
+    font-size: 0.8rem;
+  }
+
+  .session-list-table th,
+  .session-list-table td {
+    padding: 8px 12px;
+  }
+
+  .session-list-header {
+    flex-direction: column;
+    gap: 16px;
+    align-items: stretch;
+  }
+
+  .session-list-actions {
+    justify-content: center;
+  }
+
+  .session-list-summary {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+  }
+}

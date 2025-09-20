@@ -1,0 +1,189 @@
+.module-page {
+  min-height: 100vh;
+  background-color: #f9fafb;
+  padding: 2rem 0;
+}
+
+.module-page-header {
+  padding: 2rem;
+  text-align: center;
+  background: #ffffff;
+  color: #333;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.module-page-navigation {
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 1.5rem;
+  padding: 0 2rem;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.back-to-dashboard-btn {
+  padding: 0.75rem 1.5rem;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  border-radius: 0.75rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  box-shadow: 0 2px 4px rgba(102, 126, 234, 0.2);
+  text-decoration: none;
+}
+
+.back-to-dashboard-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(102, 126, 234, 0.3);
+  background: linear-gradient(135deg, #5a67d8 0%, #6b46c1 100%);
+}
+
+.back-to-dashboard-btn:active {
+  transform: translateY(0);
+}
+
+.back-to-dashboard-btn.navigating {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.back-to-dashboard-btn:disabled {
+  pointer-events: none;
+}
+
+/* Add a subtle animation for the navigating state */
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.back-to-dashboard-btn.navigating {
+  animation: none;
+}
+
+.back-to-dashboard-btn.navigating::before {
+  content: '';
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top-color: white;
+  animation: spin 1s linear infinite;
+  margin-right: 0.5rem;
+}
+
+.course-progress-info {
+  background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+  padding: 1.5rem;
+  border-radius: 1rem;
+  margin-top: 1rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  border: 1px solid #e0f2fe;
+}
+
+.progress-stats {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.progress-text {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #0284c7;
+}
+
+.modules-text {
+  font-size: 0.875rem;
+  color: #0f766e;
+  background: white;
+  padding: 0.25rem 0.75rem;
+  border-radius: 1rem;
+  border: 1px solid #a7f3d0;
+}
+
+.course-progress-bar {
+  height: 12px;
+  background: #e0f2fe;
+  border-radius: 6px;
+  overflow: hidden;
+  border: 1px solid #bae6fd;
+}
+
+.course-progress-bar .progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #0284c7, #0369a1);
+  transition: width 0.3s ease;
+}
+
+.page-title {
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 0 0 0.5rem 0;
+  letter-spacing: -0.025em;
+}
+
+.page-subtitle {
+  font-size: 1.125rem;
+  font-weight: 400;
+  margin: 0;
+  color: #666;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .module-page-header {
+    padding: 1.5rem;
+  }
+
+  .page-title {
+    font-size: 1.5rem;
+  }
+
+  .page-subtitle {
+    font-size: 1rem;
+  }
+  
+  .progress-stats {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    text-align: center;
+  }
+  
+  .module-page-navigation {
+    padding: 0 1.5rem;
+    justify-content: center;
+  }
+  
+  .back-to-dashboard-btn {
+    width: auto;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .module-page-header {
+    padding: 1rem;
+  }
+
+  .page-title {
+    font-size: 1.25rem;
+  }
+
+  .page-subtitle {
+    font-size: 0.875rem;
+  }
+}

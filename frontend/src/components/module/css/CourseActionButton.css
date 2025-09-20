@@ -1,0 +1,104 @@
+.course-action-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1.5rem;
+  background: #ffffff;
+}
+
+/* Visual Illustration Section */
+.visual-illustration-section {
+  width: 180px;
+  height: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+  position: relative;
+  background: linear-gradient(135deg, #fef3c7 0%, #fed7aa 100%);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.course-illustration {
+  max-width: 90%;
+  max-height: 90%;
+  object-fit: contain;
+  z-index: 1;
+}
+
+/* Action Button Section */
+.action-button-section {
+  width: 100%;
+  padding: 0 1.5rem;
+  margin-top: 1rem;
+}
+
+.course-action-button {
+  width: 100%;
+  padding: 0.875rem 1.5rem;
+  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(59, 130, 246, 0.25);
+  letter-spacing: -0.01em;
+  position: relative;
+  overflow: hidden;
+}
+
+.course-action-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.2) 50%,
+    transparent 100%
+  );
+  transition: left 0.5s ease;
+}
+
+.course-action-button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.35);
+  background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+}
+
+.course-action-button:hover::before {
+  left: 100%;
+}
+
+.course-action-button:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(59, 130, 246, 0.25);
+}
+
+/* Responsive Design */
+@media (max-width: 480px) {
+  .course-action-container {
+    padding: 1rem;
+  }
+
+  .visual-illustration-section {
+    width: 150px;
+    height: 120px;
+  }
+
+  .action-button-section {
+    padding: 0 1rem;
+  }
+
+  .course-action-button {
+    padding: 0.75rem 1rem;
+    font-size: 0.875rem;
+  }
+}

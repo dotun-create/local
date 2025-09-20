@@ -1,0 +1,137 @@
+/* FooterComponent Styles */
+.footer-component {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+  padding: 40px 20px;
+  background-color: #ffffff;
+  color: #404040;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+  margin-top: 60px;
+}
+
+/* Text rows */
+.footer-text-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.footer-text {
+  text-align: center;
+  font-size: 16px;
+  line-height: 1.5;
+  margin: 0;
+  color: #404040;
+}
+
+/* Social media row */
+.footer-social-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 20px 0;
+}
+
+.social-icons-container {
+  display: flex;
+  flex-direction: row;
+  gap: 30px;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.social-icon-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.social-icon-link:hover {
+  transform: translateY(-3px);
+  opacity: 0.8;
+}
+
+.social-icon {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+}
+
+/* Copyright row */
+.footer-copyright-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  border-top: 1px solid #e0e0e0;
+  padding-top: 20px;
+}
+
+.footer-copyright {
+  text-align: center;
+  font-size: 14px;
+  margin: 0;
+  color: #404040;
+}
+
+/* Statement row */
+.footer-statement-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.footer-statement {
+  text-align: center;
+  font-size: 14px;
+  margin: 0;
+  color: #404040;
+  font-style: italic;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .footer-component {
+    padding: 30px 15px;
+    gap: 15px;
+  }
+  
+  .footer-text {
+    font-size: 14px;
+  }
+  
+  .social-icons-container {
+    gap: 20px;
+  }
+  
+  .social-icon {
+    width: 28px;
+    height: 28px;
+  }
+  
+  .footer-copyright,
+  .footer-statement {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .footer-component {
+    padding: 20px 10px;
+  }
+  
+  .social-icons-container {
+    gap: 15px;
+  }
+  
+  .social-icon {
+    width: 24px;
+    height: 24px;
+  }
+}

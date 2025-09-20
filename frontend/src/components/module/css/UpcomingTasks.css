@@ -1,0 +1,354 @@
+.upcoming-tasks-card {
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  border: 1px solid #f0f0f0;
+  overflow: hidden;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.upcoming-tasks-card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+/* Tasks Header */
+.tasks-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.5rem;
+  cursor: pointer;
+  user-select: none;
+  background: #fafafa;
+  transition: background-color 0.2s ease;
+}
+
+.tasks-header:hover {
+  background: #f5f5f5;
+}
+
+.tasks-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #1f2937;
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+.collapse-toggle {
+  background: none;
+  border: none;
+  padding: 0.25rem;
+  cursor: pointer;
+  color: #6b7280;
+  transition: all 0.2s ease;
+}
+
+.toggle-icon {
+  display: block;
+  font-size: 0.75rem;
+  transition: transform 0.2s ease;
+}
+
+.collapse-toggle.collapsed .toggle-icon {
+  transform: rotate(-90deg);
+}
+
+/* Tasks List */
+.tasks-list {
+  padding: 0.5rem 0;
+  max-height: 300px;
+  overflow-y: auto;
+  animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    max-height: 0;
+  }
+  to {
+    opacity: 1;
+    max-height: 300px;
+  }
+}
+
+/* No Tasks State */
+.no-tasks {
+  padding: 2rem;
+  text-align: center;
+  color: #9ca3af;
+}
+
+.no-tasks-icon {
+  font-size: 2rem;
+  display: block;
+  margin-bottom: 0.5rem;
+  opacity: 0.5;
+}
+
+.no-tasks-text {
+  font-size: 0.875rem;
+  margin: 0;
+}
+
+/* Task Item */
+.task-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.875rem 1.5rem;
+  border-bottom: 1px solid #f5f5f5;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  position: relative;
+}
+
+.task-item:last-child {
+  border-bottom: none;
+}
+
+.task-item:hover {
+  background-color: #f9fafb;
+}
+
+.task-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.task-name {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #374151;
+  letter-spacing: -0.01em;
+}
+
+.task-type {
+  font-size: 0.75rem;
+  color: #6b7280;
+  font-weight: 400;
+}
+
+.task-due-date {
+  font-size: 0.7rem;
+  color: #ef4444;
+  font-weight: 500;
+}
+
+.task-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  background: #eff6ff;
+  border-radius: 8px;
+  color: #3b82f6;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.task-link:hover {
+  background: #3b82f6;
+  color: #ffffff;
+  transform: translateX(2px);
+}
+
+.link-icon {
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+/* Task Count Badge */
+.task-count-badge {
+  position: absolute;
+  top: 0.75rem;
+  right: 3.5rem;
+  background: #ef4444;
+  color: #ffffff;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7rem;
+  font-weight: 600;
+  box-shadow: 0 2px 4px rgba(239, 68, 68, 0.3);
+}
+
+/* Custom Scrollbar */
+.tasks-list::-webkit-scrollbar {
+  width: 4px;
+}
+
+.tasks-list::-webkit-scrollbar-track {
+  background: #f5f5f5;
+  border-radius: 2px;
+}
+
+.tasks-list::-webkit-scrollbar-thumb {
+  background: #d1d5db;
+  border-radius: 2px;
+}
+
+.tasks-list::-webkit-scrollbar-thumb:hover {
+  background: #9ca3af;
+}
+
+/* Responsive Design */
+@media (max-width: 480px) {
+  .tasks-header {
+    padding: 0.875rem 1rem;
+  }
+
+  .tasks-title {
+    font-size: 0.9rem;
+  }
+
+  .task-item {
+    padding: 0.75rem 1rem;
+  }
+
+  .task-name {
+    font-size: 0.85rem;
+  }
+
+  .task-type {
+    font-size: 0.7rem;
+  }
+}
+
+/* Enhanced Quiz Task Styles */
+.task-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  font-size: 1.2rem;
+  background: #f3f4f6;
+}
+
+.task-quiz .task-icon {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+}
+
+.task-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.task-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.task-course {
+  font-size: 0.75rem;
+  color: #6b7280;
+  background: #f9fafb;
+  padding: 0.125rem 0.5rem;
+  border-radius: 12px;
+  font-weight: 400;
+}
+
+.task-urgency {
+  font-size: 0.75rem;
+  font-weight: 500;
+  margin-top: 0.125rem;
+}
+
+.task-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.urgency-indicator {
+  font-size: 1rem;
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+.action-icon {
+  font-size: 1rem;
+  color: #6b7280;
+  transition: all 0.2s ease;
+}
+
+/* Priority Styles */
+.task-item.priority-high {
+  border-left: 4px solid #ef4444;
+  background: linear-gradient(90deg, #fef2f2 0%, #ffffff 10%);
+}
+
+.task-item.priority-high .task-urgency {
+  color: #dc2626;
+}
+
+.task-item.priority-high:hover {
+  background: linear-gradient(90deg, #fee2e2 0%, #f9fafb 10%);
+  transform: translateX(2px);
+}
+
+.task-item.priority-medium {
+  border-left: 4px solid #f59e0b;
+  background: linear-gradient(90deg, #fffbeb 0%, #ffffff 10%);
+}
+
+.task-item.priority-medium .task-urgency {
+  color: #d97706;
+}
+
+.task-item.priority-medium:hover {
+  background: linear-gradient(90deg, #fef3c7 0%, #f9fafb 10%);
+}
+
+.task-item.priority-low {
+  border-left: 4px solid #10b981;
+}
+
+.task-item.priority-low .task-urgency {
+  color: #059669;
+}
+
+.task-item.priority-low:hover {
+  background: #f0fdf4;
+}
+
+/* Quiz-specific task styling */
+.task-quiz.priority-high {
+  background: linear-gradient(90deg, #fef2f2 0%, #f8faff 20%);
+}
+
+.task-quiz.priority-medium {
+  background: linear-gradient(90deg, #fffbeb 0%, #f8faff 20%);
+}
+
+/* Hover effects */
+.task-item:hover .action-icon {
+  color: #3b82f6;
+  transform: translateX(2px);
+}
+
+/* Animation for urgency indicator */
+@keyframes pulse {
+  0%, 100% { 
+    opacity: 1; 
+    transform: scale(1);
+  }
+  50% { 
+    opacity: 0.7; 
+    transform: scale(1.05);
+  }
+}

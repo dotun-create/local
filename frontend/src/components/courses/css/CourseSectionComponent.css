@@ -1,0 +1,8 @@
+/* CourseSectionComponent Styles */
+.course-section-component {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  background-color: #ffffff;
+  min-height: fit-content;
+}

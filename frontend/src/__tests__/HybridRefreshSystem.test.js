@@ -11,23 +11,23 @@ import { BrowserRouter } from 'react-router-dom';
 import '@testing-library/jest-dom';
 
 // Import components to test
-import TutorPage from '../components/pages/TutorPage';
-import StudentDashboard from '../components/dashboard/StudentDashboard';
-import GuardianDashboard from '../components/guardian/GuardianDashboard';
+import TutorPage from '../features/tutor/pages/TutorPage';
+import StudentDashboard from '../features/dashboard/components/StudentDashboard';
+import GuardianDashboard from '../features/guardian/components/GuardianDashboard';
 
 // Import hooks and services
-import { useAdminRefresh, useTutorPageRefresh, useStudentPageRefresh } from '../hooks/useAdminRefresh';
-import websocketService from '../services/websocketService';
-import { refreshManager } from '../services/refreshManager';
-import { notificationService } from '../services/notificationService';
+import { useAdminRefresh, useTutorPageRefresh, useStudentPageRefresh } from '../shared/hooks/useAdminRefresh';
+import websocketService from '../shared/services/websocketService';
+import { refreshManager } from '../shared/services/refreshManager';
+import { notificationService } from '../shared/services/notificationService';
 
 // Mock dependencies
-jest.mock('../hooks/useData');
-jest.mock('../services/api');
-jest.mock('../services/websocketService');
-jest.mock('../services/refreshManager');
-jest.mock('../services/notificationService');
-jest.mock('../hooks/useAdminRefresh');
+jest.mock('../shared/hooks/useData');
+jest.mock('../shared/services/api');
+jest.mock('../shared/services/websocketService');
+jest.mock('../shared/services/refreshManager');
+jest.mock('../shared/services/notificationService');
+jest.mock('../shared/hooks/useAdminRefresh');
 
 describe('Hybrid Refresh System', () => {
   
@@ -340,7 +340,7 @@ describe('Hybrid Refresh System', () => {
         availability: { getTutorAvailabilityRange: jest.fn().mockResolvedValue({}) }
       };
 
-      jest.doMock('../services/api', () => ({ default: mockAPI }));
+      jest.doMock('../shared/services/api', () => ({ default: mockAPI }));
 
       render(
         <BrowserRouter>

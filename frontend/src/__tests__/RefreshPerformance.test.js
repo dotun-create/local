@@ -5,12 +5,12 @@
  */
 
 import { performance } from 'perf_hooks';
-import { useAdminRefresh } from '../hooks/useAdminRefresh';
-import websocketService from '../services/websocketService';
+import { useAdminRefresh } from '../shared/hooks/useAdminRefresh';
+import websocketService from '../shared/services/websocketService';
 
 // Mock dependencies
-jest.mock('../services/websocketService');
-jest.mock('../services/notificationService');
+jest.mock('../shared/services/websocketService');
+jest.mock('../shared/services/notificationService');
 
 describe('Refresh System Performance Tests', () => {
   

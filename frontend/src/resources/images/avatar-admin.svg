@@ -1,9 +1,0 @@
-<svg width="120" height="120" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <circle cx="60" cy="60" r="60" fill="#FFF3E0"/>
-  <circle cx="60" cy="45" r="18" fill="#FF9800"/>
-  <path d="M25 95c0-19.33 15.67-35 35-35s35 15.67 35 35v25H25V95z" fill="#FF9800"/>
-  <circle cx="60" cy="35" r="12" fill="#F57C00"/>
-  <rect x="48" y="28" width="24" height="4" rx="2" fill="#F57C00"/>
-  <rect x="52" y="32" width="16" height="2" rx="1" fill="#F57C00"/>
-  <polygon points="60,20 63,26 70,26 64.5,30 66.5,37 60,33 53.5,37 55.5,30 50,26 57,26" fill="#F57C00"/>
-</svg>

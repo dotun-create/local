@@ -1,0 +1,60 @@
+# version: '3.8'
+
+services:
+  # Backend API Service
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: troupe_backend
+    env_file:
+      - ./backend/.env.production
+    environment:
+      - FLASK_ENV=production
+      - PYTHONPATH=/app
+    networks:
+      - troupe_network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5000/api/test"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+
+  # Frontend React App
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+      args:
+        - REACT_APP_API_URL=${REACT_APP_API_URL}
+        - REACT_APP_API_BASE_URL=${REACT_APP_API_BASE_URL}
+        - REACT_APP_STRIPE_PUBLISHABLE_KEY=${REACT_APP_STRIPE_PUBLISHABLE_KEY}
+        - REACT_APP_PAYPAL_CLIENT_ID=your_paypal_client_id_here
+    container_name: troupe_frontend
+    ports:
+      - "8050:80"
+    depends_on:
+      backend:
+        condition: service_healthy
+    environment:
+      - NODE_ENV=production
+    networks:
+      - troupe_network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
+
+networks:
+  troupe_network:
+    driver: bridge
+    name: troupe_network
+
+volumes:
+  backend_uploads:
+    name: troupe_backend_uploads
